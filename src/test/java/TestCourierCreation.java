@@ -3,6 +3,7 @@ import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -14,7 +15,6 @@ public class TestCourierCreation extends CourierClient {
     public void setUp() {
         courier = CourierGenerator.randomCourier();
         courierClient = new CourierClient();
-        System.out.println(courier.getLogin());
     }
 
     @Test

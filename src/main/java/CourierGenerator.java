@@ -6,7 +6,7 @@ public class CourierGenerator {
     private static String firstName;
     private static Faker faker = new Faker();
 
-    public static Courier randomCourier(){
+    public static Courier randomCourier() {
         password = faker.internet().password(true);
         firstName = faker.name().firstName();
         login = firstName + (int) (Math.random() * 100);

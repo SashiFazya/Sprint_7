@@ -9,9 +9,9 @@ public class Order {
     private int rentTime;
     private String deliveryDate;
     private String comment;
-    private List <Color> colors;
+    private List<Color> color;
 
-    public Order(String firstName, String lastName, String address, String metroStation, String phone, int rentTime, String deliveryDate, String comment, List<Color> colors) {
+    public Order(String firstName, String lastName, String address, String metroStation, String phone, int rentTime, String deliveryDate, String comment, List<Color> color) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -20,7 +20,7 @@ public class Order {
         this.rentTime = rentTime;
         this.deliveryDate = deliveryDate;
         this.comment = comment;
-        this.colors = colors;
+        this.color = color;
     }
 
     public Order(String firstName, String lastName, String address, String metroStation, String phone, int rentTime, String deliveryDate, String comment) {
@@ -34,7 +34,7 @@ public class Order {
         this.comment = comment;
     }
 
-    public Order(){
+    public Order() {
     }
 
     public String getFirstName() {
@@ -101,11 +101,12 @@ public class Order {
         this.comment = comment;
     }
 
-    public List<Color> getColors() {
-        return colors;
+    public List<Color> getColor() {
+        return color;
     }
 
-    public void setColors(List<Color> colors) {
-        this.colors = colors;
+    public Order setColor(List<Color> color) {
+        this.color = color;
+        return this;
     }
 }

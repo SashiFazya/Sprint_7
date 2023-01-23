@@ -4,7 +4,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
@@ -12,14 +11,12 @@ import static org.hamcrest.Matchers.notNullValue;
 public class TestCourierLogin extends CourierClient {
 
     private Courier courier;
-    Courier courier1;
     private CourierClient courierClient;
 
     @Before
     public void setUp() {
         courier = CourierGenerator.randomCourier();
         courierClient = new CourierClient();
-        System.out.println(courier.getLogin());
 
         courierClient.createCourier(courier);
     }
@@ -51,9 +48,7 @@ public class TestCourierLogin extends CourierClient {
     @DisplayName("система вернёт ошибку, если неправильно указать логин")
     public void checkCourierLoginWrongLoginReturnsError() {
         String wrongLoginJson = String.format("{\"login\": \"%s\", \"password\": \"%s\"}",
-                courier.getLogin()+(int)(Math.random()*100), courier.getPassword());
-
-        System.out.println(wrongLoginJson);
+                courier.getLogin() + (int) (Math.random() * 100), courier.getPassword());
 
         loginCustomCourier(wrongLoginJson)
                 .statusCode(SC_NOT_FOUND)
@@ -64,7 +59,7 @@ public class TestCourierLogin extends CourierClient {
     @DisplayName("система вернёт ошибку, если неправильно указать пароль")
     public void checkCourierLoginWrongPassReturnsError() {
         String wrongPassJson = String.format("{\"login\": \"%s\", \"password\": \"%s\"}",
-                courier.getLogin(), courier.getPassword()+(int)(Math.random()*100));
+                courier.getLogin(), courier.getPassword() + (int) (Math.random() * 100));
 
         loginCustomCourier(wrongPassJson)
                 .statusCode(SC_NOT_FOUND)
@@ -77,7 +72,7 @@ public class TestCourierLogin extends CourierClient {
     public void checkCourierLoginWithoutLoginReturnsError() {
         String noLoginJson = String.format("{\"password\": \"%s\"}",
                 courier.getPassword());
-        System.out.println(noLoginJson);
+
         loginCustomCourier(noLoginJson)
                 .statusCode(SC_BAD_REQUEST)
                 .body("message", equalTo("Недостаточно данных для входа"));
@@ -88,7 +83,7 @@ public class TestCourierLogin extends CourierClient {
     public void checkCourierLoginEmptyLoginReturnsError() {
         String emptyLoginJson = String.format("{\"login\": \"\", \"password\": \"%s\"}",
                 courier.getPassword());
-        System.out.println(emptyLoginJson);
+
         loginCustomCourier(emptyLoginJson)
                 .statusCode(SC_BAD_REQUEST)
                 .body("message", equalTo("Недостаточно данных для входа"));
@@ -99,7 +94,7 @@ public class TestCourierLogin extends CourierClient {
     public void checkCourierLoginNullLoginReturnsError() {
         String nullLoginJson = String.format("{\"login\": %s, \"password\": \"%s\"}",
                 null, courier.getPassword());
-        System.out.println(nullLoginJson);
+
         loginCustomCourier(nullLoginJson)
                 .statusCode(SC_BAD_REQUEST)
                 .body("message", equalTo("Недостаточно данных для входа"));
@@ -112,7 +107,7 @@ public class TestCourierLogin extends CourierClient {
     public void checkCourierLoginWithoutPassReturnsError() {
         String noPassJson = String.format("{\"login\": \"%s\"}",
                 courier.getLogin());
-        System.out.println(noPassJson);
+
         loginCustomCourier(noPassJson)
                 .statusCode(SC_BAD_REQUEST)
                 .body("message", equalTo("Недостаточно данных для входа"));
@@ -123,7 +118,7 @@ public class TestCourierLogin extends CourierClient {
     public void checkCourierLoginEmptyPassReturnsError() {
         String emptyPassJson = String.format("{\"login\": \"%s\", \"password\": \"\"}",
                 courier.getLogin());
-        System.out.println(emptyPassJson);
+
         loginCustomCourier(emptyPassJson)
                 .statusCode(SC_BAD_REQUEST)
                 .body("message", equalTo("Недостаточно данных для входа"));
@@ -134,7 +129,7 @@ public class TestCourierLogin extends CourierClient {
     public void checkCourierLoginNullPassReturnsError() {
         String nullPassJson = String.format("{\"login\": \"%s\", \"password\": %s}",
                 courier.getLogin(), null);
-        System.out.println(nullPassJson);
+
         loginCustomCourier(nullPassJson)
                 .statusCode(SC_BAD_REQUEST)
                 .body("message", equalTo("Недостаточно данных для входа"));

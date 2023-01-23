@@ -1,13 +1,13 @@
 import io.restassured.response.ValidatableResponse;
 
-import static io.restassured.RestAssured.*;
+import static io.restassured.RestAssured.given;
 
 public class CourierClient extends Client {
     private static final String CREATE_COURIER_URL = "/api/v1/courier";
     private static final String LOGIN_COURIER_URL = "/api/v1/courier/login";
     private static final String DELETE_COURIER_URL = "api/v1/courier/{id}";
 
-    public ValidatableResponse createCourier(Courier courier){
+    public ValidatableResponse createCourier(Courier courier) {
 
         return given()
                 .spec(getSpec())
@@ -17,7 +17,7 @@ public class CourierClient extends Client {
                 .then();
     }
 
-    public ValidatableResponse createCustomCourier(String bodyJson){
+    public ValidatableResponse createCustomCourier(String bodyJson) {
 
         return given()
                 .spec(getSpec())
@@ -27,7 +27,7 @@ public class CourierClient extends Client {
                 .then();
     }
 
-    public ValidatableResponse loginCourier(Courier courier){
+    public ValidatableResponse loginCourier(Courier courier) {
         LoginData loginData = new LoginData(courier);
         return given()
                 .spec(getSpec())
@@ -37,7 +37,7 @@ public class CourierClient extends Client {
                 .then();
     }
 
-    public ValidatableResponse loginCustomCourier(String bodyJson){
+    public ValidatableResponse loginCustomCourier(String bodyJson) {
 
         return given()
                 .spec(getSpec())
@@ -47,7 +47,7 @@ public class CourierClient extends Client {
                 .then();
     }
 
-    public int getCourierId (Courier courier){
+    public int getCourierId(Courier courier) {
         LoginData loginData = new LoginData(courier);
         return given()
                 .spec(getSpec())
@@ -56,7 +56,7 @@ public class CourierClient extends Client {
                 .path("id");
     }
 
-    public ValidatableResponse deleteCourier (Courier courier){
+    public ValidatableResponse deleteCourier(Courier courier) {
         LoginData loginData = new LoginData(courier);
         return given()
                 .spec(getSpec())
